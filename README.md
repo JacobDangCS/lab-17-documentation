@@ -3,9 +3,8 @@
 ### A description of how to use your lambda:
 Throughout watching the video demonstrations I tried to follow and apply what I felt was applicable to my lab. Using what I learned in the lab, as well as following the given requests and instructions, I was able to progress only slighly before getting confused as to the direction that the lab was trying to take me. I was able to get some help with Instructor Ryan Gallaway and we were able to get to a point where the lab instructions were making sense. Getting back into the assignment I was able to configure some code to help me progress but ran into some error issues that I couldn't identify. Furthermore I was unable to queue up the logs to find errors. Regardless here is the code I had in progress:
 
-const { S3Client, GetObjectCommand, PutObjectCommand } = require("aws-sdk/client-s3");
 
-const client = new S3Client({region: "us-west-2"});
+const { S3, S3Client, GetObjectCommand, PutObjectCommand } = require("aws-sdk");
 
 const s3 = new S3();
 
@@ -18,27 +17,41 @@ exports.handler = async (event) => {
     
     const fileSize = event.Records[0].s3.object.size;
     
-    console.log('Image: ', imageObj);
+    const type = '.png';
+    
     
     let images = await s3.getObject(
-        {Bucket: bucketName,
-         Key: key
+        {Bucket: 'd49-jd-images',
+         Key: 'images.json'
         }).promise();
     
     try{
         let imageString = images.Body.toString();
         let parseImg = JSON.parse(parseImg);
-    
         
-         parseImg.push({
+        parseImg.push({
             name: key,
             size: fileSize,
-            type: "png",
+            type
         })
         
     } catch {
         console.log('Error, no file')
     }
+
+    
+    
+  
+    // TODO implement
+    const response = {
+        statusCode: 200,
+        body: JSON.stringify('Hello from Lambda!'),
+    };
+    return response;
+};
+
+
+
     
 
 ### A description of any issues you encountered during deployment of this lambda:
