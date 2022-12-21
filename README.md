@@ -4,7 +4,7 @@
 Throughout watching the video demonstrations I tried to follow and apply what I felt was applicable to my lab. Using what I learned in the lab, as well as following the given requests and instructions, I was able to progress only slighly before getting confused as to the direction that the lab was trying to take me. I was able to get some help with Instructor Ryan Gallaway and we were able to get to a point where the lab instructions were making sense. Getting back into the assignment I was able to configure some code to help me progress but ran into some error issues that I couldn't identify. Furthermore I was unable to queue up the logs to find errors. Regardless here is the code I had in progress:
 
 
-const { S3, S3Client, GetObjectCommand, PutObjectCommand } = require("aws-sdk");
+const { S3, GetObjectCommand } = require("aws-sdk");
 
 const s3 = new S3();
 
@@ -40,8 +40,6 @@ exports.handler = async (event) => {
     }
 
     
-    
-  
     // TODO implement
     const response = {
         statusCode: 200,
